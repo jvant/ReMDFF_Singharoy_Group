@@ -61,7 +61,7 @@ foreach i $chains {
 }
 
 guesscoord
-writepdb mdff-step1.pdb
-writepsf mdff-step1.psf
+writepsf Docked_psfgen.psf
+writepdb Docked_psfgen.pdb
 
 exit

@@ -1,7 +1,8 @@
 #!/bin/bash
 
-path_to_colores='./'
-original_map_resolution=5
-original_pdb='3jch_0.3_final.pdb'
+original_pdb=$1
+map_name=$2
+original_map_resolution=$3
+path_to_colores=$4
 
-$path_to_colores/colores map.situs $original_pdb -res $original_map_resolution -nopowell
+$path_to_colores/colores $map_name $original_pdb -res $original_map_resolution -nopowell > docking.log
