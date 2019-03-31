@@ -2,14 +2,14 @@
  
 set PSFFILE mdff-step1.psf
 set PDBFILE mdff-step1.pdb
-set GRIDPDB gridpdb0.pdb
+set GRIDPDB ./MDFF_input_files/gridpdb0.pdb
 set GBISON 1
 set DIEL 1
 set SCALING_1_4 1.0
 set ITEMP 300
 set FTEMP 300
-set GSCALE {0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3}
-set EXTRAB {ssrestraints.txt cispeptide.txt chirality.txt}
+set GSCALE PARAM_GSCALE
+set EXTRAB {./MDFF_input_files/ssrestraints.txt ./MDFF_input_files/cispeptide.txt ./MDFF_input_files/chirality.txt}
 set CONSPDB 0
 set FIXPDB  0
 set GRIDON 1

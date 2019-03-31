@@ -1,3 +1,4 @@
+
 ############################################################################
 #cr
 #cr            (C) Copyright 1995-2009 The Board of Trustees of the
@@ -87,7 +88,7 @@ if {$GRIDON} {
     mgridForceCol $i       O
     mgridForceChargeCol $i B
     mgridForcePotFile $i   [lindex $GRIDFILE $i]
-    mgridForceScale $i     [lindex $GSCALE $i] [lindex $GSCALE $i] [lindex $GSCALE $i] 
+    mgridForceScale $i     $GSCALE $GSCALE $GSCALE 
   }
 }
 
