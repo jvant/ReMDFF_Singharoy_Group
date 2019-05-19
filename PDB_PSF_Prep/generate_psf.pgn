@@ -1,0 +1,67 @@
+#!tcl
+
+##########################################################
+#             For the creation of psf files with varying pH
+#                   written by John Vant
+#                        ASU Biodesign
+###########################################################
+#                        Notes
+# Make sure you are in the directory with mypdb value
+# Usage:
+#  in bash  $ vmd -dispdev text -e makepsf.pgn
+#  in tkconsole  $ source makepsf.pgn 
+
+#############################################################
+# Set mypdb as the file you want to psf
+
+set mypdb ../Dock_PDB/col_best_001
+
+# set mutants here, if no mutants are desired then delete mutate
+#  command in segment.  If only one mutant desired then delete 
+#  corresponding mutate command in segment.
+
+
+#############################################################
+#Mod load
+
+package require psfgen
+
+resetpsf
+
+topology ../toppar_water_ions_namd.str
+topology ../toppar_all36_carb_glycopeptide.str
+
+##############################################################
+# Load pdb
+mol new $mypdb.pdb
+
+pdbalias residue HIS HSD
+pdbalias residue MSE MET
+pdbalias atom ILE CD1 CD
+
+# Get chains for segment command
+set selchains [atomselect top all]
+set chains [lsort -unique [$selchains get chain]]
+
+
+foreach i $chains {
+    set selchain [atomselect top "chain $i"]
+    $selchain writepdb chain$i.pdb
+}
+foreach i $chains {
+segment $i {pdb chain$i.pdb}
+}
+
+# Need a coordpdb command for each chain
+# Usage
+#   coordpdb [.pdb] <segid>
+
+foreach i $chains {
+    coordpdb chain$i.pdb $i
+}
+
+guesscoord
+writepsf Docked_psfgen.psf
+writepdb Docked_psfgen.pdb
+
+exit
